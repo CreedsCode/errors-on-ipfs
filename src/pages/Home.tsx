@@ -1,17 +1,17 @@
-import Hero from '../components/Hero';
-import Logo from '../components/Logo';
-import Content from '../components/Content';
-import Footer from '../components/Footer';
-import Menu from '../components/Menu';
+import { ConnectButton, useAccount } from "@web3modal/react";
+import { truncateAddress } from "../utils";
 
 function Home() {
+  const { account, isReady } = useAccount();
+
   return (
     <>
-      <Menu />
-      <Hero />
-      <Logo />
-      <Content />
-      <Footer />
+      <h1>Pls connect with your wallet first!</h1>
+      {account.isConnected === true ? (
+        <p>{truncateAddress(account.address)}</p>
+      ) : (
+        <ConnectButton />
+      )}
     </>
   );
 }
